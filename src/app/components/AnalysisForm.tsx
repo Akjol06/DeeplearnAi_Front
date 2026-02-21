@@ -146,30 +146,20 @@ export function AnalysisForm({ onSubmit, isLoading }: AnalysisFormProps) {
           </label>
           
           {!audioFile ? (
-            <div
-              onClick={() => fileInputRef.current?.click()}
-              className={`
-                relative border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer
-                hover:border-blue-500 hover:bg-blue-50 transition-all group
-                ${isLoading ? "opacity-50 pointer-events-none" : ""}
-              `}
-            >
-              <Upload className="w-12 h-12 mx-auto mb-3 text-gray-400 group-hover:text-blue-500 transition-colors" />
-              <p className="text-gray-600 group-hover:text-blue-600 transition-colors">
-                Нажмите для выбора аудио-файла
-              </p>
-              <p className="text-sm text-gray-400 mt-1">
-                MP3, WAV, OGG и другие аудио форматы
-              </p>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="audio/*"
-                onChange={handleFileChange}
-                className="hidden"
-                disabled={isLoading}
-              />
-            </div>
+              <div className="relative border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer group">
+                <Upload className="w-12 h-12 mx-auto mb-3 text-gray-400 group-hover:text-blue-500 transition-colors" />
+                <p className="text-gray-600 group-hover:text-blue-600 transition-colors">
+                  Нажмите для выбора аудио-файла
+                </p>
+                <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="audio/*"
+                    onChange={handleFileChange}
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    disabled={isLoading}
+                />
+              </div>
           ) : (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
