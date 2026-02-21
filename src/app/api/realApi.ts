@@ -40,6 +40,8 @@ function mapBackendToFrontend(data: BackendResponse): AnalysisResponse {
 // ===============================
 // Основной запрос к backend
 // ===============================
+const API_URL = import.meta.env.VITE_API_URL;
+
 export async function analyzeAudio(
     params: AnalysisRequest
 ): Promise<AnalysisResponse> {
@@ -47,7 +49,7 @@ export async function analyzeAudio(
     formData.append("audio", params.audio);
     formData.append("topic", params.topic);
 
-    const response = await fetch("http://localhost:8000/api/analyze", {
+    const response = await fetch(`${API_URL}/api/analyze`, {
         method: "POST",
         body: formData,
     });
