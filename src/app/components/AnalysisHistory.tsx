@@ -35,8 +35,8 @@ export function AnalysisHistory({
       safeScores.length > 0 ? Math.max(...safeScores) : 0;
 
   const getScoreColor = (score: number) => {
-    if (score >= 8) return "text-green-600 bg-green-100";
-    if (score >= 6) return "text-yellow-600 bg-yellow-100";
+    if (score >= 90) return "text-green-600 bg-green-100";
+    if (score >= 60) return "text-yellow-600 bg-yellow-100";
     return "text-red-600 bg-red-100";
   };
 

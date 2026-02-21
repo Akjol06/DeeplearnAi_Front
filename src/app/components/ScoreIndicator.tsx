@@ -91,7 +91,7 @@ export function ScoreIndicator({ score }: ScoreIndicatorProps) {
           />
           <div className="relative text-6xl font-bold">
             {displayScore.toFixed(1)}
-            <span className="text-2xl text-gray-400 font-normal">/10</span>
+            <span className="text-2xl text-gray-400 font-normal">/100</span>
           </div>
         </motion.div>
       </div>
@@ -103,7 +103,7 @@ export function ScoreIndicator({ score }: ScoreIndicatorProps) {
               score
             )} rounded-full relative overflow-hidden shadow-lg`}
             initial={{ width: 0 }}
-            animate={{ width: `${(animatedScore / 10) * 100}%` }}
+            animate={{ width: `${animatedScore}%` }}
             transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
           >
             {/* Анимированный блеск */}
@@ -124,7 +124,7 @@ export function ScoreIndicator({ score }: ScoreIndicatorProps) {
 
         {/* Метки прогресса */}
         <div className="flex justify-between mt-2 px-1">
-          {[0, 2, 4, 6, 8, 10].map((mark) => (
+          {[0, 20, 40, 60, 80, 100].map((mark) => (
             <div
               key={mark}
               className="flex flex-col items-center"
@@ -146,21 +146,21 @@ export function ScoreIndicator({ score }: ScoreIndicatorProps) {
       >
         <div className="text-center">
           <div className="text-2xl font-bold text-gray-700">
-            {((displayScore / 10) * 100).toFixed(0)}%
+            {displayScore.toFixed(0)}%
           </div>
           <div className="text-xs text-gray-500">Успешность</div>
         </div>
         <div className="text-center">
           <div className="text-2xl font-bold text-gray-700">
-            {score >= 8 ? "A" : score >= 6 ? "B" : score >= 4 ? "C" : "D"}
+            {score >= 90 ? "A" : score >= 75 ? "B" : score >= 60 ? "C" : "D"}
           </div>
           <div className="text-xs text-gray-500">Оценка</div>
         </div>
         <div className="text-center">
           <div className="text-2xl font-bold text-gray-700">
-            {10 - Math.floor(score)}
+            {100 - Math.floor(score)}
           </div>
-          <div className="text-xs text-gray-500">До 10</div>
+          <div className="text-xs text-gray-500">До 100</div>
         </div>
       </motion.div>
     </div>
