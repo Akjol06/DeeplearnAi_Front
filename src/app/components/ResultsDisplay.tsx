@@ -11,18 +11,18 @@ interface ResultsDisplayProps {
 
 export function ResultsDisplay({ results, topic, onReset }: ResultsDisplayProps) {
   const getScoreEmoji = (score: number) => {
-    if (score >= 9) return "🎉";
-    if (score >= 8) return "🌟";
-    if (score >= 7) return "👍";
-    if (score >= 6) return "📝";
-    return "📚";
+    if (score >= 90) return "🎉"; // отлично
+    if (score >= 80) return "🌟"; // хорошо
+    if (score >= 70) return "👍"; // удовлетворительно
+    if (score >= 60) return "📝"; // слабовато
+    return "📚"; // плохо
   };
 
   const getScoreMessage = (score: number) => {
-    if (score >= 9) return "Отличное понимание темы!";
-    if (score >= 8) return "Хорошее понимание материала";
-    if (score >= 7) return "Удовлетворительное понимание";
-    if (score >= 6) return "Необходимо углубить знания";
+    if (score >= 90) return "Отличное понимание темы!";
+    if (score >= 80) return "Хорошее понимание материала";
+    if (score >= 70) return "Удовлетворительное понимание";
+    if (score >= 60) return "Необходимо углубить знания";
     return "Требуется дополнительное изучение";
   };
 

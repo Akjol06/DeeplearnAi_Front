@@ -1,14 +1,8 @@
-// ===============================
-// Тип запроса (как у тебя было)
-// ===============================
 export interface AnalysisRequest {
     topic: string;
     audio: File;
 }
-console.log("Отправляем запрос на backend");
-// ===============================
-// Тип ответа для UI (НЕ МЕНЯЕМ)
-// ===============================
+
 export interface AnalysisResponse {
     recognizedText: string;
     comprehensionScore: number;

@@ -1,11 +1,84 @@
+# Audio Analysis Page — Анализ устного ответа
 
-  # Audio Analysis Page
+Веб-приложение для оценки понимания учебного материала по устному ответу: загрузка аудиозаписи и темы, распознавание речи и анализ с помощью ИИ, вывод оценки и рекомендаций.
 
-  This is a code bundle for Audio Analysis Page. The original project is available at https://www.figma.com/design/d0dlrlYvblyLHP319u1XsG/Audio-Analysis-Page.
+Оригинальный макет в Figma: [Audio Analysis Page](https://www.figma.com/design/d0dlrlYvblyLHP319u1XsG/Audio-Analysis-Page).
 
-  ## Running the code
+## Возможности
 
-  Run `npm i` to install the dependencies.
+- **Загрузка ответа** — ввод темы и загрузка аудио (MP3, WAV, OGG и др.)
+- **Предпросмотр аудио** — встроенный плеер с воспроизведением и перемоткой
+- **Анализ через API** — отправка на бэкенд, транскрипция и оценка понимания
+- **Результаты** — оценка по 10-балльной шкале, правильные аспекты, ошибки, распознанный текст и рекомендации
+- **История анализов** — до 10 последних записей в `localStorage`, просмотр и удаление
 
-  Run `npm run dev` to start the development server.
-  
+## Стек
+
+- **React 18** + **TypeScript**
+- **Vite 6** — сборка и dev-сервер
+- **Tailwind CSS 4** — стили
+- **Motion** — анимации
+- **Lucide React** — иконки
+
+Бэкенд (отдельный проект): **Symfony API** на `http://localhost:8000`, endpoint `POST /api/analyze` (FormData: `topic`, `audio`).
+
+## Структура проекта
+
+```
+src/
+├── app/
+│   ├── App.tsx                 # Корневой компонент, состояние, вызов API и истории
+│   ├── api/
+│   │   ├── realApi.ts          # Запрос к Symfony backend, маппинг ответа
+│   │   └── mockApi.ts         # Сохранение/получение истории в localStorage
+│   └── components/
+│       ├── AnalysisForm.tsx    # Форма: тема, загрузка аудио, плеер
+│       ├── ResultsDisplay.tsx  # Блок результатов анализа
+│       ├── AnalysisHistory.tsx # Боковая панель с историей
+│       └── ScoreIndicator.tsx  # Анимированная шкала оценки
+├── types/
+│   └── analysis.ts            # Типы анализа (используются в части кода)
+├── styles/
+│   └── index.css              # Глобальные стили
+└── main.tsx                   # Точка входа
+```
+
+## Запуск
+
+### Требования
+
+- **Node.js** (рекомендуется LTS)
+- **Бэкенд** должен быть запущен на `http://localhost:8000` и принимать `POST /api/analyze` с полями `topic` (string) и `audio` (файл). Ответ в формате:
+
+  ```json
+  {
+    "transcribed_text": "...",
+    "analysis": {
+      "score": 8.5,
+      "correct_aspects": ["..."],
+      "mistakes": ["..."],
+      "recommendations": ["..."]
+    }
+  }
+  ```
+
+### Установка и разработка
+
+```bash
+npm i
+npm run dev
+```
+
+Приложение откроется по адресу из вывода Vite (обычно `http://localhost:5173`).
+
+### Сборка для продакшена
+
+```bash
+npm run build
+```
+
+Артефакты появятся в каталоге `dist/`.
+
+## Настройка API
+
+URL бэкенда задаётся в `src/app/api/realApi.ts` (по умолчанию `http://localhost:8000/api/analyze`). При другом хосте или порте измените константу в этом файле или вынесите её в переменные окружения и подставьте в коде.
